@@ -2,6 +2,9 @@ import { GetStaticProps, GetStaticPropsResult } from 'next';
 
 import Prismic from '@prismicio/client';
 import Link from 'next/link';
+import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+import { FiCalendar, FiUser } from 'react-icons/fi';
 import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
@@ -30,21 +33,20 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
   // TODO
   return (
     <main className={styles.container}>
-      <div className={styles.content}>
-        <img className={styles.logo} src="/images/Logo.svg" alt="logo" />
-        {postsPagination.results.map(post => (
-          <Link key={post.uid} href={`/posts/${post.uid}`}>
-            <a className={styles.post}>
-              <strong>{post.data.title}</strong>
-              <p>{post.data.subtitle}</p>
-              <div>
-                <time>{post.first_publication_date}</time>
-                <p>{post.data.author}</p>
-              </div>
-            </a>
-          </Link>
-        ))}
-      </div>
+      {postsPagination.results.map(post => (
+        <Link key={post.uid} href={`/posts/${post.uid}`}>
+          <a className={styles.post}>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.subtitle}</p>
+            <div>
+              <FiCalendar />
+              <time>{post.first_publication_date}</time>
+              <FiUser />
+              <p>{post.data.author}</p>
+            </div>
+          </a>
+        </Link>
+      ))}
     </main>
   );
 }
@@ -62,7 +64,11 @@ export const getStaticProps: GetStaticProps = async () => {
   const posts = results.map(post => {
     return {
       uid: post.uid,
-      first_publication_date: post.first_publication_date,
+      first_publication_date: format(
+        new Date(post.first_publication_date),
+        'dd LLL yyyy',
+        { locale: ptBR }
+      ),
       data: post.data,
     };
   });

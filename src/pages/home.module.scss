@@ -5,13 +5,27 @@
   padding: 0 2rem;
 }
 
-.logo {
-  margin: 3rem 0;
-}
 .post {
   display: block;
 
   div {
     display: flex;
+    time {
+      text-transform: capitalize;
+    }
+
+    svg {
+      margin-right: 0.4rem;
+    }
+  }
+
+  strong {
+    font-size: 34px;
+    color: var(--heading);
+  }
+
+  div,
+  p {
+    color: var(--info);
   }
 }
