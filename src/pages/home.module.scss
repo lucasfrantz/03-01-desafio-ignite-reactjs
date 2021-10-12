@@ -7,11 +7,18 @@
 
 .post {
   display: block;
-
+  margin-bottom: 2rem;
+  h2 {
+    margin-bottom: 0.5rem;
+  }
+  p {
+    margin-bottom: 0.5rem;
+  }
   div {
     display: flex;
     time {
       text-transform: capitalize;
+      margin-right: 1rem;
     }
 
     svg {
