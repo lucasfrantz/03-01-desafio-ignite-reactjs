@@ -1,1 +1,17 @@
 // TODO
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.logo {
+  margin: 3rem 0;
+}
+.post {
+  display: block;
+
+  div {
+    display: flex;
+  }
+}
